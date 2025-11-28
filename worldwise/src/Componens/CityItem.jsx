@@ -20,14 +20,17 @@ function CityItem({ city }) {
     }).format(new Date(date));
 
   console.log(city);
-  const { cityName, emoji, date, id } = city;
+  const { cityName, emoji, date, id, position } = city;
 
   const countryCode = emojiToCountryCode(emoji);
   return (
     <>
       <li>
         {/* <Link to={`/app/cities/${id}`} className={style.cityItem}> */}
-        <Link to={`${id}`} className={style.cityItem}>
+        <Link
+          className={style.cityItem}
+          to={`${id}?lat=${position.lat}&lng=${position.lng}`}
+        >
           <img
             src={`https://flagcdn.com/w40/${countryCode}.png`}
             alt={`${cityName} flag`}
