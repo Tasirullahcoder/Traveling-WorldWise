@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import style from "./CityItem.module.css";
+import { Usecities } from "../contexts/CitiesContext";
 function CityItem({ city }) {
+  const { currentCity } = Usecities();
   // Converts emoji flag 🇵🇹 → country code "pt"
   function emojiToCountryCode(emoji) {
     // Convert emoji unicode points into country letters
@@ -28,7 +30,9 @@ function CityItem({ city }) {
       <li>
         {/* <Link to={`/app/cities/${id}`} className={style.cityItem}> */}
         <Link
-          className={style.cityItem}
+          className={`${style.cityItem} ${
+            id === currentCity.id ? style["cityItem--active"] : ""
+          }`}
           to={`${id}?lat=${position.lat}&lng=${position.lng}`}
         >
           <img
