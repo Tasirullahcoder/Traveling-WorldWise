@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import style from "./CityItem.module.css";
 import { Usecities } from "../contexts/CitiesContext";
 function CityItem({ city }) {
-  const { currentCity } = Usecities();
+  const { currentCity, DeleteCity } = Usecities();
   // Converts emoji flag 🇵🇹 → country code "pt"
   function emojiToCountryCode(emoji) {
     // Convert emoji unicode points into country letters
@@ -25,6 +25,12 @@ function CityItem({ city }) {
   const { cityName, emoji, date, id, position } = city;
 
   const countryCode = emojiToCountryCode(emoji);
+
+  function DeleteHandler(e) {
+    e.preventDefault();
+    DeleteCity(id); // call DeleteCity function from context to delete city and this id will go to DeleteCity func
+    console.log("delete", id);
+  }
   return (
     <>
       <li>
@@ -42,7 +48,9 @@ function CityItem({ city }) {
           />
           <h3 className={style.name}>{cityName}</h3>
           <time className={style.date}>{formatDate(date)}</time>
-          <button className={style.deleteBtn}>&times;</button>
+          <button className={style.deleteBtn} onClick={DeleteHandler}>
+            &times;
+          </button>
         </Link>
       </li>
     </>

@@ -37,6 +37,44 @@ function CitiesProvider({ children }) {
     }
   }
 
+  async function createCity(newCity) {
+    try {
+      setisLoading(true);
+      const response = await fetch(`${BASE_URL}/cities`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newCity),
+      });
+      const data = await response.json();
+      // setcurrentCity(data)
+      // below a line setCities is when you want to add a new city and hen immediately show it in the list without refetching from the server .acually sync UI and Remote state
+      setCities((cities) => [...cities, data]);
+      console.log(data);
+    } catch (error) {
+      console.error("Error fetching cities:", error);
+    } finally {
+      setisLoading(false);
+    }
+  }
+
+  async function DeleteCity(id) {
+    try {
+      setisLoading(true);
+      await fetch(`${BASE_URL}/cities/${id}`, {
+        // here id will be recieved from the CityItem component
+        method: "DELETE",
+      });
+
+      setCities((cities) => cities.filter((city) => city.id !== id)); // filter out the deleted city
+    } catch (error) {
+      console.error("Error fetching cities:", error);
+    } finally {
+      setisLoading(false);
+    }
+  }
+
   return (
     <CitiesContext.Provider
       value={{
@@ -44,6 +82,8 @@ function CitiesProvider({ children }) {
         isLoading,
         currentCity,
         getCity,
+        createCity,
+        DeleteCity,
       }}
     >
       {children}
