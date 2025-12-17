@@ -1,6 +1,7 @@
 import { createContext, useContext, useReducer } from "react";
 
 const AuthContext = createContext();
+
 const FAKE_USER = {
   name: "Jack",
   emaiL: "jack@example.com",
@@ -25,6 +26,7 @@ function FakeAuthProvider({ children }) {
     Reducer,
     initialstate
   );
+
   function login({ email, password }) {
     if (email === FAKE_USER.emaiL && password === FAKE_USER.password)
       dispatch({ type: "login", payload: FAKE_USER });
@@ -32,6 +34,7 @@ function FakeAuthProvider({ children }) {
   function logout() {
     dispatch({ type: "logout", payload: FAKE_USER });
   }
+
   return (
     <AuthContext.Provider
       value={{
@@ -47,9 +50,10 @@ function FakeAuthProvider({ children }) {
 }
 function UseAuth() {
   const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error("UseAuth must be used within a AuthProvider");
-  }
+  return context;
+  // if (context === undefined) {
+  //   throw new Error("useAuth must be used within a AuthProvider");
+  // }
 }
 
 export { FakeAuthProvider, UseAuth };
