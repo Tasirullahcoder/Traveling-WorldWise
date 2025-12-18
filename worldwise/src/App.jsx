@@ -13,6 +13,7 @@ import Form from "./Componens/Form.jsx";
 import { Navigate } from "react-router-dom";
 import { CitiesProvider } from "./contexts/CitiesContext.jsx";
 import { FakeAuthProvider } from "./contexts/FakeAuthContex.jsx";
+import ProtectedRoute from "./Pages/ProtectedRoute.jsx";
 
 function App() {
   return (
@@ -27,7 +28,14 @@ function App() {
               <Route path="/pricing" element={<Pricing />} />
               <Route path="*" element={<PageNotFound />} />
               <Route path="/login" element={<Login />} />
-              <Route path="app" element={<AppLayout />}>
+              <Route
+                path="app"
+                element={
+                  <ProtectedRoute>
+                    <AppLayout />
+                  </ProtectedRoute>
+                }
+              >
                 <Route index element={<Navigate replace to="cities" />} />
                 <Route path="cities" element={<CityList />} />
                 <Route path="cities/:id" element={<City />} />

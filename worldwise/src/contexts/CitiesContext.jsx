@@ -53,7 +53,7 @@ function CitiesProvider({ children }) {
       setCities((cities) => [...cities, data]);
       console.log(data);
     } catch (error) {
-      console.error("Error fetching cities:", error);
+      console.error("Error adding cities:", error);
     } finally {
       setisLoading(false);
     }
@@ -69,7 +69,7 @@ function CitiesProvider({ children }) {
 
       setCities((cities) => cities.filter((city) => city.id !== id)); // filter out the deleted city
     } catch (error) {
-      console.error("Error fetching cities:", error);
+      console.error("Error deleting cities:", error);
     } finally {
       setisLoading(false);
     }

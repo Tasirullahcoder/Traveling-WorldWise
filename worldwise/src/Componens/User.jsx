@@ -2,17 +2,11 @@ import styles from "./User.module.css";
 import { UseAuth } from "../contexts/FakeAuthContex";
 import { useNavigate } from "react-router-dom";
 
-const FAKE_USER = {
-  name: "Jack",
-  email: "jack@example.com",
-  password: "qwerty",
-  avatar: "https://i.pravatar.cc/100?u=zz",
-};
-
 function User() {
-  const { logout } = UseAuth();
+  const { user, logout } = UseAuth();
   const navigate = useNavigate();
-  const user = FAKE_USER;
+
+  // if (!user) return null; // ✅ guard
 
   function handleLogout() {
     logout();
@@ -27,7 +21,6 @@ function User() {
     </div>
   );
 }
-
 export default User;
 
 /*

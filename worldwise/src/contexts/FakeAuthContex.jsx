@@ -3,7 +3,7 @@ import { createContext, useContext, useReducer } from "react";
 const AuthContext = createContext();
 
 const FAKE_USER = {
-  name: "Jack",
+  name: "Jonas",
   emaiL: "jack@example.com",
   password: "qwerty",
   avatar: "https://i.pravatar.cc/100?u=zz",
